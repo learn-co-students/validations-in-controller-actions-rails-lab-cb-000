@@ -29,7 +29,7 @@ RSpec.describe AuthorsController do
     let(:bad_attributes) { { email: jeff.email } }
     let(:jeff_bad) { Author.create(bad_attributes) }
 
-    it "does not create" do
+    it "does not create a new record" do
       expect(jeff_bad).to be_new_record
     end
 

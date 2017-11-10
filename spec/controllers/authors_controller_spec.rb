@@ -1,5 +1,5 @@
 require "rails_helper"
-
+require 'pry'
 RSpec.describe AuthorsController do
   let(:jeff) { Author.create!(name: "H. Jeff", email: "jeff@sbahj.info") }
   let(:jeff_found) { Author.find_by(email: jeff.email) }
@@ -26,10 +26,12 @@ RSpec.describe AuthorsController do
   end
 
   describe "creating an invalid author" do
+
     let(:bad_attributes) { { email: jeff.email } }
     let(:jeff_bad) { Author.create(bad_attributes) }
 
     it "does not create" do
+      
       expect(jeff_bad).to be_new_record
     end
 

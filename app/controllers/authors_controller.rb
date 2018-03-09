@@ -4,13 +4,18 @@ class AuthorsController < ApplicationController
   end
 
   def new
-  end
+   @author = Author.new
+ end
 
-  def create
-    @author = Author.create!(author_params)
+ def create
+   @author = Author.new(author_params)
 
-    redirect_to author_path(@author)
-  end
+   if @author.save
+     redirect_to author_path(@author)
+   else
+     render :new #otherwise render the new page again
+   end
+ end
 
   private
 

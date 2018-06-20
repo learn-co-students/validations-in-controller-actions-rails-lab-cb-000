@@ -1,4 +1,5 @@
 require "rails_helper"
+require 'byebug'
 
 RSpec.describe AuthorsController do
   let(:jeff) { Author.create!(name: "H. Jeff", email: "jeff@sbahj.info") }

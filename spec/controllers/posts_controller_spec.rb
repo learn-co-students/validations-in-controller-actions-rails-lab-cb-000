@@ -39,6 +39,7 @@ RSpec.describe PostsController do
       # patch :update, new_attributes
       patch :update, params: {         id: @article.id,
               title: "Fifteen Ways to Transcend Corporeal Form",
+              content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed dapibus, nulla vel condimentum ornare, arcu lorem hendrerit purus, ac sagittis ipsum nisl nec erat. Morbi porta sollicitudin leo, eu cursus libero posuere ac. Sed ac ultricies ante. Donec nec nulla ipsum. Nunc eleifend, ligula ut volutpat.",
               category: "Fiction" }
       expect(response).to redirect_to(post_path(@article))
     end
@@ -69,7 +70,13 @@ RSpec.describe PostsController do
     end
 
     describe "controller actions" do
-      before { patch :update, bad_attributes }
+      before { patch :update,  params: {
+        id: @article.id,
+        title: nil,
+        content: "too short",
+        category: "Speculative Fiction"
+      }
+    }
 
       it "does not update" do
         expect(article_found.content).to_not eq("too short")

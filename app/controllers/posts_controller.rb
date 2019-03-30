@@ -15,11 +15,11 @@ class PostsController < ApplicationController
 
   private
 
-  def post_params
-    params.permit(:category, :content, :title)
-  end
+    def post_params
+      params.permit(:category, :content, :title)
+    end
 
-  def set_post!
-    @post = Post.find(params[:id])
-  end
+    def set_post!
+      @post = Post.find(params[:id])
+    end
 end

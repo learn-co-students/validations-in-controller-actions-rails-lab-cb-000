@@ -14,7 +14,12 @@ RSpec.describe PostsController do
     @article = Post.create!(attributes)
   end
 
-
+  describe "showing a post" do
+    it "shows a post" do
+      get :show, id: @article.id
+      expect(article_found).to eq(@article)
+    end
+  end
 
   describe "making valid updates" do
     let(:new_attributes) do
@@ -30,6 +35,11 @@ RSpec.describe PostsController do
       expect(article_found.title).to eq(new_attributes[:title])
     end
 
+    it "redirects to show page" do
+      patch :update, new_attributes
+      expect(response).to redirect_to(post_path(@article))
+    end
+  end
 
   describe "making invalid updates" do
     let(:bad_attributes) do
@@ -57,8 +67,15 @@ RSpec.describe PostsController do
 
     describe "controller actions" do
       before { patch :update, bad_attributes }
+
+      it "does not update" do
+        expect(article_found.content).to_not eq("too short")
+      end
+
+      it "renders the form again" do
+        expect(response).to render_template(:edit)
+      end
     end
   end
-end
 
 end
